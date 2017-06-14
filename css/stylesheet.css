@@ -99,6 +99,13 @@ section {
   font-size: 14px;
   cursor: pointer;
   float: right;
+  margin: 0; /* Correct the inability to style clickable types in iOS and Safari */
+}
+
+button {
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
 }
 
 #addNewBtn:hover,
