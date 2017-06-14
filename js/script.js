@@ -5,6 +5,10 @@ var todos = [];
 var nextId = 1;
 
 displayList();
+// if (localStorage["todoData"]) {
+//   todos = JSON.parse(localStorage["todoData"]);
+//   displayList();
+// }
 
 $("#addNewBtn").on("click", addNewTodo);
 $("#listOfTasks").on("click", ".editItem", editTodo);
@@ -31,6 +35,7 @@ function displayList() {
     var spanDelete = "<span class='deleteItem'><i class='fa fa-trash-o' aria-hidden='true'></i></span>";
     var spanEdit = "<span class='editItem'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></span>";
     var spanDate = "<span class='itemDate'>" + todo.todoDate + "</span>";
+    var spanStar = "<span class='starItem'><i class='fa fa-star' aria-hidden='true'></i></span>";
     if (todo.todoCompleted === true) {
       spanCheckbox = "<span class='itemCheckbox'><i class='fa fa-check-square-o' aria-hidden='true'></i></span>";
     } else if (todo.todoCompleted === false) {
@@ -40,16 +45,17 @@ function displayList() {
     li.append(spanContent);
     if (todo.todoCompleted === false) {
       li.append(spanDelete);
-    li.append(spanEdit);
-    li.append(spanDate);
+      li.append(spanEdit);
+      if (todo.todoStarred === true) {
+        li.append(spanStar);
+      }
+      li.append(spanDate);
     }
-
     if (todo.todoCompleted === true) {
       $("#listOfCompletedTasks").append(li);
     } else if (todo.todoCompleted === false) {
       $("#listOfTasks").append(li);
     }
-
   }
   $("#bg-overlay").removeClass("overlay");
   $("#task-modal").hide();
@@ -76,6 +82,7 @@ function displayStarredList() {
     var spanDelete = "<span class='deleteItem'><i class='fa fa-trash-o' aria-hidden='true'></i></span>";
     var spanEdit = "<span class='editItem'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></span>";
     var spanDate = "<span class='itemDate'>" + todo_starred.todoDate + "</span>";
+    var spanStar = "<span class='starItem'><i class='fa fa-star' aria-hidden='true'></i></span>";
     if (todo_starred.todoCompleted === true) {
       spanCheckbox = "<span class='itemCheckbox'><i class='fa fa-check-square-o' aria-hidden='true'></i></span>";
     } else if (todo_starred.todoCompleted === false) {
@@ -86,15 +93,16 @@ function displayStarredList() {
     if (todo_starred.todoCompleted === false) {
       li.append(spanDelete);
     li.append(spanEdit);
+    if (todo_starred.todoStarred === true) {
+      li.append(spanStar);
+    }
     li.append(spanDate);
     }
-
     if (todo_starred.todoCompleted === true) {
       $("#listOfCompletedTasks").append(li);
     } else if (todo_starred.todoCompleted === false) {
       $("#listOfTasks").append(li);
     }
-
   }
 }
 
@@ -119,6 +127,7 @@ function displayTodayList() {
     var spanDelete = "<span class='deleteItem'><i class='fa fa-trash-o' aria-hidden='true'></i></span>";
     var spanEdit = "<span class='editItem'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></span>";
     var spanDate = "<span class='itemDate'>" + todo_today.todoDate + "</span>";
+    var spanStar = "<span class='starItem'><i class='fa fa-star' aria-hidden='true'></i></span>";
     if (todo_today.todoCompleted === true) {
       spanCheckbox = "<span class='itemCheckbox'><i class='fa fa-check-square-o' aria-hidden='true'></i></span>";
     } else if (todo_today.todoCompleted === false) {
@@ -129,20 +138,22 @@ function displayTodayList() {
     if (todo_today.todoCompleted === false) {
       li.append(spanDelete);
     li.append(spanEdit);
+    if (todo_today.todoStarred === true) {
+      li.append(spanStar);
+    }
     li.append(spanDate);
     }
-
     if (todo_today.todoCompleted === true) {
       $("#listOfCompletedTasks").append(li);
     } else if (todo_today.todoCompleted === false) {
       $("#listOfTasks").append(li);
     }
-
   }
-
 }
 
-
+// function storeTodoData() {
+//   localStorage["todoData"] = JSON.stringify(todos);
+// }
 
 function addNewTodo() {
   addOrEditTodo();
@@ -162,6 +173,7 @@ function markAsComplete(evt) {
     addOrEditTodo(todos[i]);
   }
   displayList();
+  // storeTodoData();
   console.log(todos);
 }
 
@@ -175,6 +187,7 @@ function confirmAndDeleteTodo(evt) {
   }
   function deleteTodo(idx) {
     todos.splice(idx, 1);
+    // storeTodoData();
   }
 }
 
@@ -246,10 +259,9 @@ function addOrEditTodo(todo) {
       todos.push(newTodo);
     }
     displayList();
-
+    // storeTodoData();
     console.log(todos);
   }
-
 }
 
 function toggleStarred() {
