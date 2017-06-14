@@ -86,9 +86,9 @@ section {
 }
 
 #tasks-header {
-  margin-top: -2rem;
+  margin-top: -32px;
   color: #ffeded;
-  font-size: 1.4rem;
+  font-size: 23px;
 }
 
 #addNewBtn {
@@ -215,7 +215,7 @@ section {
   padding-top: 0.4rem;
 }
 
-.itemDate, .editItem, .deleteItem {
+.starItem, .itemDate, .editItem, .deleteItem {
   float: right;
   padding-top: 0.2rem;
   padding-left: 0.4rem;
@@ -226,4 +226,8 @@ section {
   padding-top: 0.3rem;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
+}
+
+.task-list .starItem i {
+  cursor: auto;
 }
