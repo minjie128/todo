@@ -4,11 +4,10 @@
 var todos = [];
 var nextId = 1;
 
-displayList();
-// if (localStorage["todoData"]) {
-//   todos = JSON.parse(localStorage["todoData"]);
-//   displayList();
-// }
+if (localStorage["todoData"]) {
+ todos = JSON.parse(localStorage["todoData"]);
+ displayList();
+}
 
 $("#addNewBtn").on("click", addNewTodo);
 $("#listOfTasks").on("click", ".editItem", editTodo);
@@ -151,9 +150,9 @@ function displayTodayList() {
   }
 }
 
-// function storeTodoData() {
-//   localStorage["todoData"] = JSON.stringify(todos);
-// }
+function storeTodoData() {
+   localStorage["todoData"] = JSON.stringify(todos);
+ }
 
 function addNewTodo() {
   addOrEditTodo();
@@ -173,7 +172,7 @@ function markAsComplete(evt) {
     addOrEditTodo(todos[i]);
   }
   displayList();
-  // storeTodoData();
+  storeTodoData();
   console.log(todos);
 }
 
@@ -187,7 +186,7 @@ function confirmAndDeleteTodo(evt) {
   }
   function deleteTodo(idx) {
     todos.splice(idx, 1);
-    // storeTodoData();
+    storeTodoData();
   }
 }
 
@@ -259,7 +258,7 @@ function addOrEditTodo(todo) {
       todos.push(newTodo);
     }
     displayList();
-    // storeTodoData();
+    storeTodoData();
     console.log(todos);
   }
 }
