@@ -223,7 +223,7 @@ function addOrEditTodo(todo) {
   }
 
   $("#modalSaveBtn").one("click", addOrUpdateTodo);
-  $("#modalCancelBtn").one("click", displayList);
+//  $("#modalCancelBtn").one("click", displayList);
 
   $("#bg-overlay").addClass("overlay");
   $("#task-modal").show();
